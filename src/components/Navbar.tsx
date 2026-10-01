@@ -27,7 +27,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, onOpenDonate }) => 
     { name: 'Daily Verse', href: '#daily-verse' },
     { name: 'Beliefs', href: '#beliefs' },
     { name: 'Readiness Quiz', href: '#quiz' },
-    { name: 'Give', href: '#give' },
     { name: 'FAQ', href: '#faq' },
   ];
 

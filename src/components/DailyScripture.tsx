@@ -5,7 +5,8 @@ import { DAILY_SCRIPTURES } from '../data/scriptures';
 export const DailyScripture: React.FC = () => {
   const todayDate = new Date();
   const todayDay = todayDate.getDate(); // 1 - 31
-  const defaultIndex = (todayDay - 1) % DAILY_SCRIPTURES.length;
+  // Day of month mapped 1:1 to verse index (Index 0 = Day 1, Index 30 = Day 31)
+  const defaultIndex = Math.min(Math.max(todayDay - 1, 0), DAILY_SCRIPTURES.length - 1);
 
   const [currentIndex, setCurrentIndex] = useState<number>(defaultIndex);
 
@@ -22,11 +23,6 @@ export const DailyScripture: React.FC = () => {
 
   const handleToday = () => {
     setCurrentIndex(defaultIndex);
-  };
-
-  const handleRandom = () => {
-    const rand = Math.floor(Math.random() * DAILY_SCRIPTURES.length);
-    setCurrentIndex(rand);
   };
 
   return (
@@ -115,24 +111,16 @@ export const DailyScripture: React.FC = () => {
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
-
-              {!isToday && (
-                <button
-                  onClick={handleToday}
-                  className="px-3 py-2 rounded-xl bg-[#B66D44]/20 border border-[#B66D44]/40 text-xs font-bold text-[#F8EDE6] hover:bg-[#B66D44] hover:text-[#FDFBF7] transition-colors"
-                >
-                  Return to Today
-                </button>
-              )}
             </div>
 
-            <button
-              onClick={handleRandom}
-              className="px-4 py-2.5 rounded-xl bg-[#11161B] border border-slate-800 hover:border-[#B66D44] text-xs font-semibold text-[#94A3B8] hover:text-[#FDFBF7] transition-colors flex items-center gap-2"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#B66D44]" />
-              <span>Random Verse</span>
-            </button>
+            {!isToday && (
+              <button
+                onClick={handleToday}
+                className="px-4 py-2.5 rounded-xl bg-[#B66D44] text-xs font-bold text-[#FDFBF7] hover:bg-[#9E5933] transition-colors shadow-md shadow-[#B66D44]/20"
+              >
+                Return to Today (Day {todayDay})
+              </button>
+            )}
           </div>
         </div>
       </div>

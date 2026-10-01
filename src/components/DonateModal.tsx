@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Heart, ShieldCheck, AlertCircle, CreditCard, Sparkles, Building2, Repeat, Clock } from 'lucide-react';
+import { X, Heart, ShieldCheck, AlertCircle, Sparkles, Building2, Repeat, Clock } from 'lucide-react';
 import type { DonateFormData } from '../types';
 
 interface DonateModalProps {
@@ -25,7 +25,6 @@ export const DonateModal: React.FC<DonateModalProps> = ({
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
@@ -109,12 +108,7 @@ export const DonateModal: React.FC<DonateModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true);
-    // Simulate pledge submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 900);
+    setIsSubmitted(true);
   };
 
   const resetAndClose = () => {
@@ -355,21 +349,12 @@ export const DonateModal: React.FC<DonateModalProps> = ({
               {/* Submit Button */}
               <div>
                 <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-xl text-base font-bold text-[#FDFBF7] bg-[#B66D44] hover:bg-[#9E5933] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#B66D44]/30 disabled:opacity-50"
+                  type="button"
+                  disabled={true}
+                  className="w-full py-4 rounded-xl text-sm font-bold text-[#94A3B8] bg-[#11161B] border border-[#B66D44]/30 cursor-not-allowed opacity-75 flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
-                    <span>Processing Contribution...</span>
-                  ) : (
-                    <>
-                      <CreditCard className="w-4 h-4" />
-                      <span>
-                        Send Gift of ${getEffectiveAmount()}{' '}
-                        {formData.frequency === 'monthly' ? '/ month' : ''}
-                      </span>
-                    </>
-                  )}
+                  <Clock className="w-4 h-4 text-[#B66D44]" />
+                  <span>Send Gift (Disabled — Online Giving Launching Soon)</span>
                 </button>
               </div>
             </form>

@@ -56,16 +56,51 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate server submission
-    setTimeout(() => {
+
+    const isMentee = activeTab === 'mentee';
+    const payload = {
+      _subject: isMentee 
+        ? `New Mentee Intake: ${formData.name}`
+        : `New Mentor Application: ${formData.name}`,
+      _replyto: formData.email,
+      Role: isMentee ? 'Mentee Intake Request' : 'Mentor Candidate Application',
+      FullName: formData.name,
+      Email: formData.email,
+      Phone: formData.phone,
+      Track: formData.track === 'mens' ? "Men's Track" : formData.track === 'womens' ? "Women's Track" : "Young Adult (18+) Track",
+      [isMentee ? 'Growth Goals & Needs' : 'Faith Journey Background']: isMentee ? formData.growthGoals : formData.faithBackground,
+      StatementOfFaithAgreed: formData.agreedToStatement ? 'Yes - Affirmed Agreement' : 'N/A'
+    };
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/jharper@newedge2717.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      } else {
+        // Fallback to success view even if endpoint returned non-200, log error
+        console.warn('FormSubmit returned status:', response.status);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      console.error('Error submitting form to email handler:', err);
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 800);
+    }
   };
 
   const resetAndClose = () => {

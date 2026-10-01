@@ -7,7 +7,6 @@ import { GospelCallout } from './components/GospelCallout';
 import { StatementOfFaith } from './components/StatementOfFaith';
 import { DailyScripture } from './components/DailyScripture';
 import { MentorshipQuiz } from './components/MentorshipQuiz';
-import { DonateSection } from './components/DonateSection';
 import { BudgetOverview } from './components/BudgetOverview';
 import { FAQSection } from './components/FAQSection';
 import { Footer } from './components/Footer';
@@ -64,9 +63,6 @@ export function App() {
         {/* Interactive Readiness Assessment Quiz */}
         <MentorshipQuiz onOpenModal={handleOpenModal} />
 
-        {/* Dedicated Giving / Financial Partnership Section */}
-        <DonateSection onOpenDonate={handleOpenDonate} />
-
         {/* Governance & Stewardship Transparency */}
         <BudgetOverview onOpenDonate={() => handleOpenDonate(50, 'monthly')} />
 
@@ -85,7 +81,7 @@ export function App() {
         defaultTrack={modalTrack}
       />
 
-      {/* Donate Modal (Demo Mode) */}
+      {/* Donate Modal */}
       <DonateModal
         isOpen={donateModalOpen}
         onClose={() => setDonateModalOpen(false)}
