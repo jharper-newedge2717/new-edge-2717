@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Repeat, ShieldCheck, ArrowRight, Sparkles, CheckCircle2, Info } from 'lucide-react';
+import { Heart, Repeat, ShieldCheck, ArrowRight, Sparkles, CheckCircle2, Info, Clock } from 'lucide-react';
 
 interface DonateSectionProps {
   onOpenDonate: (amount?: number, frequency?: 'monthly' | 'one_time') => void;
@@ -88,9 +88,15 @@ export const DonateSection: React.FC<DonateSectionProps> = ({ onOpenDonate }) =>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#11161B] border border-[#B66D44]/30 text-xs font-semibold text-[#B66D44] tracking-widest uppercase mb-4">
-            <Heart className="w-3.5 h-3.5 fill-current" />
-            <span>Financial Partnership</span>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#11161B] border border-[#B66D44]/30 text-xs font-semibold text-[#B66D44] tracking-widest uppercase">
+              <Heart className="w-3.5 h-3.5 fill-current" />
+              <span>Financial Partnership</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B66D44]/20 border border-[#B66D44]/40 text-xs font-bold text-[#F8EDE6]">
+              <Clock className="w-3.5 h-3.5 text-[#B66D44]" />
+              <span>Coming Soon • 501(c)(3) Pending</span>
+            </div>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#FDFBF7] tracking-tight mb-4">
             Invest in Sharpening Lives Across Washoe County
@@ -98,6 +104,14 @@ export const DonateSection: React.FC<DonateSectionProps> = ({ onOpenDonate }) =>
           <p className="text-base sm:text-lg text-[#94A3B8]">
             Mentorship is 100% free for mentees. Your financial support directly equips mentors, provides curriculum, and builds lasting discipleship community in Reno.
           </p>
+
+          {/* Coming Soon Alert Box */}
+          <div className="mt-6 p-4 rounded-2xl bg-[#11161B]/90 border border-[#B66D44]/40 text-xs text-[#94A3B8] max-w-xl mx-auto flex items-start gap-3 text-left shadow-lg">
+            <Clock className="w-5 h-5 text-[#B66D44] shrink-0 mt-0.5" />
+            <p className="leading-relaxed">
+              <strong className="text-[#FDFBF7]">Online Giving Launching Soon:</strong> We are currently completing our official Nevada 501(c)(3) incorporation & tax-exempt determination. You can preview our giving tiers below or pledge early support to be notified upon launch!
+            </p>
+          </div>
 
           {/* Monthly vs One-Time Frequency Switcher */}
           <div className="flex flex-col items-center gap-3 mt-8">

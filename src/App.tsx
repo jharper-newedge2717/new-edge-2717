@@ -5,6 +5,7 @@ import { TracksGrid } from './components/TracksGrid';
 import { DiscipleshipPathway } from './components/DiscipleshipPathway';
 import { GospelCallout } from './components/GospelCallout';
 import { StatementOfFaith } from './components/StatementOfFaith';
+import { DailyScripture } from './components/DailyScripture';
 import { MentorshipQuiz } from './components/MentorshipQuiz';
 import { DonateSection } from './components/DonateSection';
 import { BudgetOverview } from './components/BudgetOverview';
@@ -53,6 +54,9 @@ export function App() {
 
         {/* Gospel Callout / Why We Exist */}
         <GospelCallout onOpenModal={handleOpenModal} />
+
+        {/* Daily Iron & Scripture (31 Daily Rotating Verses) */}
+        <DailyScripture />
 
         {/* Statement of Faith Accordion */}
         <StatementOfFaith />

@@ -65,11 +65,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenModal, onOpenDonate }) => 
                 <span>Washoe County / Reno, NV</span>
               </div>
               <a
-                href="mailto:info@newedge2717.org"
+                href="mailto:jharper@newedge2717.com"
                 className="flex items-center gap-2 text-[#94A3B8] hover:text-[#FDFBF7] transition-colors group"
               >
                 <Mail className="w-4 h-4 text-[#B66D44] group-hover:text-[#FDFBF7] shrink-0 transition-colors" />
-                <span className="group-hover:underline">info@newedge2717.org</span>
+                <span className="group-hover:underline">jharper@newedge2717.com</span>
               </a>
               <a
                 href="tel:7752717646"

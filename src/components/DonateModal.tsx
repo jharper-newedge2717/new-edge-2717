@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Heart, ShieldCheck, AlertCircle, CreditCard, Sparkles, Building2, Repeat } from 'lucide-react';
+import { X, Heart, ShieldCheck, AlertCircle, CreditCard, Sparkles, Building2, Repeat, Clock } from 'lucide-react';
 import type { DonateFormData } from '../types';
 
 interface DonateModalProps {
@@ -110,7 +110,7 @@ export const DonateModal: React.FC<DonateModalProps> = ({
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate payment submission demo
+    // Simulate pledge submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -144,6 +144,10 @@ export const DonateModal: React.FC<DonateModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-bold text-[#FDFBF7]">Support the Mission</h3>
+                <span className="px-2 py-0.5 rounded-full bg-[#B66D44]/20 text-[10px] font-bold text-[#B66D44] border border-[#B66D44]/30 flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#B66D44]" />
+                  Coming Soon (501c3 Pending)
+                </span>
               </div>
               <p className="text-xs text-[#94A3B8]">New Edge 27:17 Ministries • Washoe County, NV</p>
             </div>
@@ -168,14 +172,15 @@ export const DonateModal: React.FC<DonateModalProps> = ({
 
               <div>
                 <span className="text-xs font-bold text-[#B66D44] uppercase tracking-widest">
-                  Simulated Contribution Received
+                  Early Pledge Registered
                 </span>
                 <h4 className="text-2xl font-extrabold text-[#FDFBF7] mt-1 mb-2">
                   Thank You, {formData.name}!
                 </h4>
                 <p className="text-sm text-[#94A3B8] max-w-md mx-auto leading-relaxed">
-                  Your demo {formData.frequency === 'monthly' ? 'monthly' : 'one-time'} gift of{' '}
-                  <strong className="text-[#FDFBF7]">${getEffectiveAmount()}</strong> directly empowers Christ-centered mentorship across Reno and Washoe County.
+                  We have registered your pledged {formData.frequency === 'monthly' ? 'monthly' : 'one-time'} support of{' '}
+                  <strong className="text-[#FDFBF7]">${getEffectiveAmount()}</strong>. We will notify you at{' '}
+                  <strong className="text-[#FDFBF7]">{formData.email}</strong> as soon as online giving officially launches upon final 501(c)(3) determination!
                 </p>
               </div>
 
