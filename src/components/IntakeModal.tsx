@@ -78,7 +78,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     };
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/jharper@newedge2717.com', {
+      const response = await fetch('https://formsubmit.co/ajax/f59ad3fb74184105c5e0c0bbf6bf6bde', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
