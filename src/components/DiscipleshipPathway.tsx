@@ -152,6 +152,90 @@ export const DiscipleshipPathway: React.FC = () => {
             </div>
           </div>
         </div>
+        {/* Dual Delivery Model Callout (1:1 Mentorship & Small Group Discipleship) */}
+        <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#11161B] via-[#1A2229] to-[#11161B] border border-[#B66D44]/40 shadow-2xl">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="px-3 py-1 rounded-full bg-[#B66D44]/20 border border-[#B66D44]/40 text-xs font-bold text-[#F8EDE6] uppercase tracking-wider">
+              Flexible Ministry Delivery
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#FDFBF7] mt-3 mb-2">
+              Two Models, One Mission
+            </h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8]">
+              Whether you thrive in deep 1-on-1 accountability or a vibrant small group, New Edge 27:17 offers both structured formats across all three tracks.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card 1: 1-on-1 Mentorship */}
+            <div className="p-6 rounded-2xl bg-[#11161B] border border-slate-800 space-y-4 hover:border-[#B66D44]/40 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-[#B66D44]/15 text-[#B66D44]">
+                  <UserPlus className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-[#FDFBF7]">1-on-1 Mentorship Model</h4>
+                  <p className="text-xs text-[#94A3B8]">Individual pairing • 6–12 Month Arc</p>
+                </div>
+              </div>
+
+              <p className="text-xs text-[#94A3B8] leading-relaxed">
+                Single mentor matched 1-on-1 with a mentee for maximum personal depth, tailored spiritual goal setting, and private accountability.
+              </p>
+
+              <div className="space-y-2 pt-2 border-t border-slate-800/80 text-xs text-[#FDFBF7]">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>Customized meeting times & public check-in locations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>Direct mentor milestone verification every month</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>Deep focus on personal spiritual application</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Small Group Discipleship */}
+            <div className="p-6 rounded-2xl bg-[#11161B] border border-[#B66D44]/50 space-y-4 relative overflow-hidden">
+              <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-[#B66D44] text-[10px] font-bold text-[#FDFBF7] uppercase tracking-wider">
+                Multiplication Model
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-[#B66D44]/25 text-[#B66D44]">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-[#FDFBF7]">Small Group Discipleship</h4>
+                  <p className="text-xs text-[#94A3B8]">4–8 Members • Group Leader + Pairs</p>
+                </div>
+              </div>
+
+              <p className="text-xs text-[#94A3B8] leading-relaxed">
+                One Group Leader facilitates 4–8 members with weekly group discussion (30m) + nested accountability pairs/triads (20m) for deep vulnerability.
+              </p>
+
+              <div className="space-y-2 pt-2 border-t border-slate-800/80 text-xs text-[#FDFBF7]">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>Dual Confidentiality: Group-level & Pair-level privacy</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>3 Pace Options: 6 Mo (Accelerated), 9 Mo, 12 Mo</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#B66D44]" />
+                  <span>Group Multiplication: Leaders seed & commission new groups</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

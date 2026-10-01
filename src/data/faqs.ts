@@ -27,8 +27,18 @@ export const FAQS: FAQItem[] = [
     answer: "Mentors must affirm our Statement of Faith, complete a background check, participate in mentor training, and commit to meeting faithfully with their assigned mentee bi-weekly for 6–12 months."
   },
   {
+    category: 'mentees',
+    question: "How does the Small Group Discipleship format work?",
+    answer: "Small Groups consist of 4–8 members led by a trained Group Leader. Meetings run weekly: 30 minutes of large-group teaching and discussion, followed by 20 minutes in dedicated accountability pairs/triads for personal vulnerability and milestone check-ins."
+  },
+  {
+    category: 'general',
+    question: "How does confidentiality work in Small Groups?",
+    answer: "Small Groups operate under a 2-Tier Confidentiality Covenant. Group-level discussions stay strictly within the room. Pair-level discussions within your accountability partner time are even more protected and not automatically shared with the whole room or leader. The only exception is safety (risk of harm)."
+  },
+  {
     category: 'mentors',
-    question: "Where do mentorship meetings take place?",
-    answer: "Meetings take place at mutually convenient locations in the Reno/Sparks/Washoe County area — such as coffee shops, local partner churches, or public community centers."
+    question: "Can I apply to lead a Small Group instead of 1-on-1 mentoring?",
+    answer: "Yes! Group Leaders complete our core Mentor Training plus a dedicated Group Facilitation Module (drawing out quiet members, managing dominant personalities, and overseeing accountability pairs). As groups mature, leaders commission new leaders to multiply and seed new groups."
   }
 ];

@@ -34,15 +34,20 @@ export interface DoctrinalPoint {
 }
 
 export type ModalTab = 'mentee' | 'mentor';
+export type DiscipleshipFormat = 'one_on_one' | 'group';
+export type GroupPace = '6_months' | '9_months' | '12_months';
 
 export interface IntakeFormData {
   name: string;
   email: string;
   phone: string;
   track: TrackId;
+  format: DiscipleshipFormat;
+  groupPace?: GroupPace;
   growthGoals?: string;
   faithBackground?: string;
   agreedToStatement?: boolean;
+  agreedToCovenant?: boolean;
 }
 
 export interface FAQItem {

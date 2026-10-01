@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { X, UserCheck, Shield, CheckCircle2, AlertCircle, Send } from 'lucide-react';
-import type { ModalTab, TrackId, IntakeFormData } from '../types';
+import { X, UserCheck, Shield, CheckCircle2, AlertCircle, Send, Users, User } from 'lucide-react';
+import type { ModalTab, TrackId, IntakeFormData, GroupPace } from '../types';
 
 interface IntakeModalProps {
   isOpen: boolean;
@@ -21,9 +21,12 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     email: '',
     phone: '',
     track: defaultTrack,
+    format: 'one_on_one',
+    groupPace: '9_months',
     growthGoals: '',
     faithBackground: '',
-    agreedToStatement: false
+    agreedToStatement: false,
+    agreedToCovenant: false
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -52,6 +55,10 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
       if (!formData.agreedToStatement) errs.agreedToStatement = 'You must affirm agreement with our Statement of Faith to serve as a mentor';
     }
 
+    if (formData.format === 'group' && !formData.agreedToCovenant) {
+      errs.agreedToCovenant = 'You must affirm the Group Covenant to participate in or lead a small group';
+    }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -65,16 +72,21 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     const isMentee = activeTab === 'mentee';
     const payload = {
       _subject: isMentee 
-        ? `New Mentee Intake: ${formData.name}`
-        : `New Mentor Application: ${formData.name}`,
+        ? `New Mentee Intake (${formData.format === 'group' ? 'Small Group' : '1:1'}): ${formData.name}`
+        : `New Mentor Application (${formData.format === 'group' ? 'Group Leader' : '1:1 Mentor'}): ${formData.name}`,
       _replyto: formData.email,
-      Role: isMentee ? 'Mentee Intake Request' : 'Mentor Candidate Application',
+      Role: isMentee 
+        ? (formData.format === 'group' ? 'Small Group Member Request' : '1:1 Mentee Request')
+        : (formData.format === 'group' ? 'Group Leader Application' : '1:1 Mentor Application'),
       FullName: formData.name,
       Email: formData.email,
       Phone: formData.phone,
       Track: formData.track === 'mens' ? "Men's Track" : formData.track === 'womens' ? "Women's Track" : "Young Adult (18+) Track",
+      DiscipleshipFormat: formData.format === 'group' ? 'Small Group (4-8 Members + Pairs)' : '1-on-1 Mentorship',
+      GroupPace: formData.format === 'group' ? (formData.groupPace === '6_months' ? '6 Months (Accelerated)' : formData.groupPace === '12_months' ? '12 Months (Full Pace)' : '9 Months (Standard)') : 'N/A',
       [isMentee ? 'Growth Goals & Needs' : 'Faith Journey Background']: isMentee ? formData.growthGoals : formData.faithBackground,
-      StatementOfFaithAgreed: formData.agreedToStatement ? 'Yes - Affirmed Agreement' : 'N/A'
+      StatementOfFaithAgreed: formData.agreedToStatement ? 'Yes - Affirmed Agreement' : 'N/A',
+      GroupCovenantAgreed: formData.agreedToCovenant ? 'Yes - Affirmed Group Covenant' : 'N/A'
     };
 
     try {
@@ -110,9 +122,12 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
       email: '',
       phone: '',
       track: 'mens',
+      format: 'one_on_one',
+      groupPace: '9_months',
       growthGoals: '',
       faithBackground: '',
-      agreedToStatement: false
+      agreedToStatement: false,
+      agreedToCovenant: false
     });
     setErrors({});
     onClose();
@@ -310,7 +325,99 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
                 </div>
               </div>
 
-              {/* Tab 1 Mentee Specific Field */}
+              {/* Discipleship Model Format Selector (1:1 vs Small Group) */}
+              <div>
+                <label className="block text-xs font-bold text-[#FDFBF7] uppercase tracking-wider mb-1.5">
+                  Preferred Discipleship Format <span className="text-[#B66D44]">*</span>
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, format: 'one_on_one' })}
+                    className={`p-3 rounded-xl text-left border transition-all ${
+                      formData.format === 'one_on_one'
+                        ? 'bg-[#B66D44] text-[#FDFBF7] border-[#B66D44] shadow-md'
+                        : 'bg-[#11161B] text-[#94A3B8] border-slate-800 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 font-bold text-xs text-[#FDFBF7] mb-1">
+                      <User className="w-4 h-4 text-[#FDFBF7]" />
+                      <span>1-on-1 Mentorship</span>
+                    </div>
+                    <div className="text-[11px] opacity-80 leading-tight">
+                      Single mentor & mentee paired for personal 1-on-1 depth.
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, format: 'group' })}
+                    className={`p-3 rounded-xl text-left border transition-all ${
+                      formData.format === 'group'
+                        ? 'bg-[#B66D44] text-[#FDFBF7] border-[#B66D44] shadow-md'
+                        : 'bg-[#11161B] text-[#94A3B8] border-slate-800 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 font-bold text-xs text-[#FDFBF7] mb-1">
+                      <Users className="w-4 h-4 text-[#FDFBF7]" />
+                      <span>Small Group (4–8 Members)</span>
+                    </div>
+                    <div className="text-[11px] opacity-80 leading-tight">
+                      Group discussion + weekly accountability pairs & multiplication.
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Group Pace Options (Shown if Group model selected) */}
+              {formData.format === 'group' && (
+                <div className="p-4 rounded-2xl bg-[#11161B] border border-[#B66D44]/40 space-y-3 animate-fadeIn">
+                  <div>
+                    <label className="block text-xs font-bold text-[#F8EDE6] uppercase tracking-wider mb-1.5">
+                      Target Group Covenant Pace
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { id: '6_months', label: '6 Months', detail: 'Accelerated' },
+                        { id: '9_months', label: '9 Months', detail: 'Standard' },
+                        { id: '12_months', label: '12 Months', detail: 'Full Pace' }
+                      ].map((pace) => (
+                        <button
+                          key={pace.id}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, groupPace: pace.id as GroupPace })}
+                          className={`p-2 rounded-xl text-center border text-xs transition-colors ${
+                            formData.groupPace === pace.id
+                              ? 'bg-[#222B32] text-[#FDFBF7] border-[#B66D44] font-bold'
+                              : 'bg-[#1A2229] text-[#94A3B8] border-slate-800'
+                          }`}
+                        >
+                          <div className="font-bold text-[#FDFBF7]">{pace.label}</div>
+                          <div className="text-[10px] text-[#94A3B8]">{pace.detail}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Group Covenant Agreement Checkbox */}
+                  <div className="pt-2 border-t border-slate-800">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.agreedToCovenant}
+                        onChange={(e) => setFormData({ ...formData, agreedToCovenant: e.target.checked })}
+                        className="mt-1 w-4 h-4 rounded text-[#B66D44] focus:ring-[#B66D44] accent-[#B66D44]"
+                      />
+                      <span className="text-xs text-[#94A3B8] leading-relaxed">
+                        I affirm the <strong className="text-[#FDFBF7]">New Edge Group Covenant</strong>: commit to weekly meetings, respect 2-tier confidentiality (group & pair level), and engage in accountability pairs.
+                      </span>
+                    </label>
+                    {errors.agreedToCovenant && (
+                      <p className="text-xs text-red-400 flex items-center gap-1 pt-1.5"><AlertCircle className="w-3.5 h-3.5" />{errors.agreedToCovenant}</p>
+                    )}
+                  </div>
+                </div>
+              )}
               {activeTab === 'mentee' && (
                 <div>
                   <label className="block text-xs font-bold text-[#FDFBF7] uppercase tracking-wider mb-1.5">
